@@ -1,0 +1,29 @@
+3. BCD to Decimal:
+https://1.bp.blogspot.com/-Tfj_D_f_AF0/VZO5QIIGAUI/AAAAAAAAAmI/5Rw6uIU3EiI/s1600/DS1307%2BTime%2BKeeper%2BRegister.PNG
+
+DS1307 has its time registers in BCD format as shown in the image found in the above link, To set the time we need to convert the decimal number to BCD format, hence a. Write a macro to convert decimal to BCD
+b. Write a fucntion to convert decimal to BCD
+
+
+Ans - 
+
+#define DEC_TO_BCD(dec) (((dec / 10) << 4) | (dec % 10))
+#include <stdio.h>
+
+// Function to convert decimal to BCD
+unsigned char dec_to_bcd(unsigned char dec) {
+    return ((dec / 10) << 4) | (dec % 10);
+}
+
+int main() {
+    unsigned char decimalNumber = 25; // Replace with any decimal number you want to convert to BCD
+    unsigned char bcdResult = dec_to_bcd(decimalNumber);
+    
+    printf("Decimal: %d\n", decimalNumber);
+    printf("BCD: 0x%02X\n", bcdResult);
+    
+    return 0;
+}
+
+
+

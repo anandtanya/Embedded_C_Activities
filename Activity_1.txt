@@ -1,0 +1,50 @@
+1. Write bits
+Say you have a 32 bit variable X, write a program that would fit a given number N into X at a given position P.
+Lets say you have 
+X = 10 which in 32 bit binary is 0000,0000,0000,0000,0000,0000,0000,1010 
+N = 5 which is 101 in binary
+P = 6
+
+So the result should be 0000,0000,0000,0000,0000,0000,0101,1010 
+
+Example 2:
+X = 10 which in 32 bit binary is 0000,0000,0000,0000,0000,0000,0000,1010 
+N = 5 which is 101 in binary
+P = 2
+
+So the result should be 0000,0000,0000,0000,0000,0000,0000,1101 
+
+Ans- 
+
+#include <stdio.h>
+
+unsigned int insert_bits(unsigned int X, unsigned int N, int P) {
+    // Clear the bits of X at position P to 0
+    unsigned int mask = ~(1 << P);
+    X &= mask;
+
+    // Shift N to the left to position P and combine it with X
+    unsigned int result = X | (N << P);
+    return result;
+}
+
+int main() {
+    // Test Example 1
+    unsigned int X1 = 10;
+    unsigned int N1 = 5;
+    int P1 = 6;
+    unsigned int result1 = insert_bits(X1, N1, P1);
+    printf("%u\n", result1);  // Output: 90 (in decimal) -> 00000000000000000000000001011010 (in binary)
+
+    // Test Example 2
+    unsigned int X2 = 10;
+    unsigned int N2 = 5;
+    int P2 = 2;
+    unsigned int result2 = insert_bits(X2, N2, P2);
+    printf("%u\n", result2);  // Output: 13 (in decimal) -> 00000000000000000000000000001101 (in binary)
+
+    return 0;
+}
+
+
+

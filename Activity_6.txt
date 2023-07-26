@@ -1,0 +1,51 @@
+6. Register Access:
+https://i1.wp.com/www.embetronicx.com/wp-content/uploads/2017/07/intcon-register-pic16f877a.png?resize=725%2C177
+
+Assume the above register found in the above link. Let its name be INTCON itself
+Write a code to access it bitwise as well as bytewise
+Example: You should be able to write the below statements your code
+INTOCON = 0x82;
+or
+GIE = 1;
+INTF0IF = 1;
+
+Ans - 
+
+#include <stdio.h>
+
+// Define the structure representing the bit-fields of INTCON
+struct INTCON_bits {
+    unsigned GIE : 1;      // Global Interrupt Enable bit
+    unsigned PEIE : 1;     // Peripheral Interrupt Enable bit
+    unsigned T0IE : 1;     // Timer0 Overflow Interrupt Enable bit
+    unsigned INTE0 : 1;    // External Interrupt 0 Enable bit
+    unsigned RBIE : 1;     // RB Port Change Interrupt Enable bit
+    unsigned T0IF : 1;     // Timer0 Overflow Interrupt Flag bit
+    unsigned INTE0IF : 1;  // External Interrupt 0 Flag bit
+    unsigned RBIF : 1;     // RB Port Change Interrupt Flag bit
+};
+
+// Define a union to access INTCON both as a whole and bitwise
+typedef union {
+    unsigned char INTCON_reg;  // Access INTCON as a whole
+    struct INTCON_bits bits;   // Access INTCON bitwise
+} INTCON_union;
+
+int main() {
+    INTCON_union INTCON;
+
+    // Access INTCON bytewise
+    INTCON.INTCON_reg = 0x82;
+
+    // Access INTCON bitwise
+    INTCON.bits.GIE = 1;
+    INTCON.bits.T0IF = 1;
+    INTCON.bits.INTE0IF = 1;
+
+    printf("INTCON register value: 0x%02X\n", INTCON.INTCON_reg);
+    printf("GIE bit: %u\n", INTCON.bits.GIE);
+    printf("T0IF bit: %u\n", INTCON.bits.T0IF);
+    printf("INTE0IF bit: %u\n", INTCON.bits.INTE0IF);
+
+    return 0;
+}

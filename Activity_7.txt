@@ -1,0 +1,35 @@
+7. Write a program to remove the given character in case of duplicacy
+For example, let's say we have s = "Hello", c = 'l', the result will be "Helo"
+let's say we have s = "Hello World", c = 'l', the result will be "Helo Word"
+
+Ans - 
+
+#include <stdio.h>
+#include <string.h>
+
+void remove_duplicate_char(char *str, char c) {
+    int len = strlen(str);
+    int j = 0;
+
+    for (int i = 0; i < len; i++) {
+        if (str[i] != c || j == 0 || str[j - 1] != c) {
+            str[j++] = str[i];
+        }
+    }
+
+    str[j] = '\0';
+}
+
+int main() {
+    char str1[] = "Hello";
+    char c1 = 'l';
+    remove_duplicate_char(str1, c1);
+    printf("Result: %s\n", str1); // Output: Helo
+
+    char str2[] = "Hello World";
+    char c2 = 'l';
+    remove_duplicate_char(str2, c2);
+    printf("Result: %s\n", str2); // Output: Helo Word
+
+    return 0;
+}

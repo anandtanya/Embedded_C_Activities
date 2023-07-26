@@ -1,0 +1,68 @@
+4. Bit Operations:
+https://1.bp.blogspot.com/-Tfj_D_f_AF0/VZO5QIIGAUI/AAAAAAAAAmI/5Rw6uIU3EiI/s1600/DS1307%2BTime%2BKeeper%2BRegister.PNG
+
+DS1307 has its time registers in BCD format as shown in the image found in the above link, so 
+a. Write a macro to Set, clear and toggle bit of an 8 bit number
+
+Ans - 
+
+#include <stdio.h>
+
+// Macro to set a bit at a specified position (bit is set to 1)
+#define SET_BIT(number, position) ((number) |= (1U << (position)))
+
+// Macro to clear a bit at a specified position (bit is set to 0)
+#define CLEAR_BIT(number, position) ((number) &= ~(1U << (position)))
+
+// Macro to toggle a bit at a specified position (bit is flipped: 0 to 1 or 1 to 0)
+#define TOGGLE_BIT(number, position) ((number) ^= (1U << (position)))
+
+int main() {
+    unsigned char num = 0x55; // Example: 01010101 in binary
+
+    // Using macros to perform bit operations
+    SET_BIT(num, 2);    // Set bit 2
+    CLEAR_BIT(num, 3);  // Clear bit 3
+    TOGGLE_BIT(num, 4); // Toggle bit 4
+
+    printf("Result: 0x%02X\n", num); // Output: 0x59 (01011001 in binary)
+
+    return 0;
+}
+
+
+b. Write a function to Set, clear and toggle bit of an 8 bit number
+
+Ans - 
+
+#include <stdio.h>
+
+// Function to set a bit at a specified position (bit is set to 1)
+void set_bit(unsigned char *number, unsigned char position) {
+    *number |= (1U << position);
+}
+
+// Function to clear a bit at a specified position (bit is set to 0)
+void clear_bit(unsigned char *number, unsigned char position) {
+    *number &= ~(1U << position);
+}
+
+// Function to toggle a bit at a specified position (bit is flipped: 0 to 1 or 1 to 0)
+void toggle_bit(unsigned char *number, unsigned char position) {
+    *number ^= (1U << position);
+}
+
+int main() {
+    unsigned char num = 0x55; // Example: 01010101 in binary
+
+    // Using functions to perform bit operations
+    set_bit(&num, 2);    // Set bit 2
+    clear_bit(&num, 3);  // Clear bit 3
+    toggle_bit(&num, 4); // Toggle bit 4
+
+    printf("Result: 0x%02X\n", num); // Output: 0x59 (01011001 in binary)
+
+    return 0;
+}
+
+
